@@ -27,6 +27,7 @@
     buttonback        = "Interface\\AddOns\\Lorti UI\\textures\\button_background",
     buttonbackflat    = "Interface\\AddOns\\Lorti UI\\textures\\button_background_flat",
     outer_shadow      = "Interface\\AddOns\\Lorti UI\\textures\\outer_shadow",
+    micro_hover      = "Interface\\AddOns\\Lorti UI\\textures\\micro_hover",
   }
 
   cfg.background = {

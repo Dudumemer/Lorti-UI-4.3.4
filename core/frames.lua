@@ -74,7 +74,7 @@
 			GameTimeFrame:Hide()
 			GameTimeFrame:UnregisterAllEvents()
 			GameTimeFrame.Show = kill
-			MiniMapTracking:Hide()
+--			MiniMapTracking:Hide()
 			MiniMapTracking.Show = kill
 			MiniMapTracking:UnregisterAllEvents()
 			Minimap:EnableMouseWheel(true)
@@ -166,6 +166,7 @@
 		else
 			CastingBarFrameBorder:SetVertexColor(.05,.05,.05)    
 		end
+  
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
         	CF:SetScript("OnEvent", nil)
 	end)
@@ -268,5 +269,19 @@
     for i = 1, self:GetNumRegions() do
       local CBTregion = select(i, self:GetRegions())
       CBTregion:SetVertexColor(0, 0, 0, .95)
+    end
+  end)
+
+  hooksecurefunc("UnitFramePortrait_Update",function(self)
+    if self.portrait then
+      if UnitIsPlayer(self.unit) then			
+        local t = CLASS_ICON_TCOORDS[select(2,UnitClass(self.unit))]
+        if t then
+          self.portrait:SetTexture("Interface\\TargetingFrame\\UI-Classes-Circles")
+          self.portrait:SetTexCoord(unpack(t))
+        end
+      else
+        self.portrait:SetTexCoord(0,1,0,1)
+      end
     end
   end)

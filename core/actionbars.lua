@@ -285,6 +285,27 @@
     if not bu.bg then applyBackground(bu) end
     bu.rabs_styled = true
   end
+  
+    local function styleContainerButton(bu)
+    if not bu or (bu and bu.rabs_styled) then return end
+    local name = bu:GetName()
+    local ic  = _G[name.."Icon"]
+    local fl  = _G[name.."Flash"]
+
+    --setting the textures
+    fl:SetTexture(cfg.textures.flash)
+    bu:SetHighlightTexture(cfg.textures.hover)
+    bu:SetPushedTexture(cfg.textures.pushed)
+    bu:SetCheckedTexture(cfg.textures.checked)
+    bu:SetNormalTexture(cfg.textures.normal)
+    --cut the default border of the icons and make them shiny
+    ic:SetTexCoord(0.1,0.9,0.1,0.9)
+    ic:SetPoint("TOPLEFT", bu, "TOPLEFT", 2, -2)
+    ic:SetPoint("BOTTOMRIGHT", bu, "BOTTOMRIGHT", -2, 2)
+    --shadows+background
+    if not bu.bg then applyBackground(bu) end
+    bu.rabs_styled = true
+  end
 
   --style possess buttons
   local function stylePossessButton(bu)
@@ -335,6 +356,18 @@
 --  end
 
   local function init()
+    MainMenuBarBackpackButton:SetCheckedTexture(cfg.textures.equipped)
+    CharacterBag0Slot:SetCheckedTexture(cfg.textures.equipped)
+    CharacterBag1Slot:SetCheckedTexture(cfg.textures.equipped)
+    CharacterBag2Slot:SetCheckedTexture(cfg.textures.equipped)
+    CharacterBag3Slot:SetCheckedTexture(cfg.textures.equipped)
+    
+    for i =1, #MICRO_BUTTONS do
+      local border = select(3, _G[MICRO_BUTTONS[i]]:GetRegions())
+      _G[MICRO_BUTTONS[i]]:SetHighlightTexture(cfg.textures.micro_hover)
+--      border:SetVertexColor(.3,.3,.3)
+    end
+
     --style the actionbar buttons
     for i = 1, NUM_ACTIONBAR_BUTTONS do
       styleActionButton(_G["ActionButton"..i])
@@ -364,6 +397,10 @@
     for i=1, NUM_POSSESS_SLOTS do
       stylePossessButton(_G["PossessButton"..i])
     end
+    
+--    for i = 0, NUM_BAG_SLOTS - 1 do
+--      styleContainerButton(_G["CharacterBag"..i.."Slot"])
+--    end
     --extraactionbutton1
     styleExtraActionButton(ExtraActionButton1)
     --spell flyout
