@@ -285,3 +285,45 @@
       end
     end
   end)
+
+_G["PlayerFrame_UpdateStatus"] = function()
+	if ( UnitHasVehiclePlayerFrameUI("player") ) then
+		PlayerStatusTexture:Hide()
+		PlayerRestIcon:Hide()
+		PlayerAttackIcon:Hide()
+		PlayerRestGlow:Hide()
+		PlayerAttackGlow:Hide()
+		PlayerStatusGlow:Hide()
+		PlayerAttackBackground:Hide()
+	elseif ( IsResting() ) then
+		PlayerStatusTexture:SetVertexColor(.8, .8, .8, 1.0);
+		PlayerStatusTexture:Show();
+		PlayerRestIcon:Show();
+		PlayerAttackIcon:Hide();
+		PlayerRestGlow:Show();
+		PlayerAttackGlow:Hide();
+		PlayerStatusGlow:Show();
+		PlayerStatusGlow:GetRegions():SetVertexColor(.8, .8, .8, 1.0);
+		PlayerAttackBackground:Hide();
+	elseif ( PlayerFrame.inCombat ) then
+		PlayerStatusTexture:SetVertexColor(1.0, 0.0, 0.0, 1.0);
+		PlayerStatusTexture:Show();
+		PlayerAttackIcon:Show();
+		PlayerRestIcon:Hide();
+		PlayerAttackGlow:Show();
+		PlayerRestGlow:Hide();
+		PlayerStatusGlow:Show();
+		PlayerAttackBackground:Show();
+	elseif ( PlayerFrame.onHateList ) then
+		PlayerAttackIcon:Show();
+		PlayerRestIcon:Hide();
+		PlayerStatusGlow:Hide();
+		PlayerAttackBackground:Hide();
+	else
+		PlayerStatusTexture:Hide();
+		PlayerRestIcon:Hide();
+		PlayerAttackIcon:Hide();
+		PlayerStatusGlow:Hide();
+		PlayerAttackBackground:Hide();
+	end
+end

@@ -343,19 +343,9 @@
   ---------------------------------------
   -- INIT
   ---------------------------------------
-  
---  local function GetNumStances()
---    local count = 0
-    
---    for 1 = 1, 10 do
---      if _G["StanceButton"..i]:IsShown() then
---        count = count + 1
---      end
---    end
---    return count
---  end
 
   local function init()
+    
     MainMenuBarBackpackButton:SetCheckedTexture(cfg.textures.equipped)
     CharacterBag0Slot:SetCheckedTexture(cfg.textures.equipped)
     CharacterBag1Slot:SetCheckedTexture(cfg.textures.equipped)
@@ -363,9 +353,7 @@
     CharacterBag3Slot:SetCheckedTexture(cfg.textures.equipped)
     
     for i =1, #MICRO_BUTTONS do
-      local border = select(3, _G[MICRO_BUTTONS[i]]:GetRegions())
       _G[MICRO_BUTTONS[i]]:SetHighlightTexture(cfg.textures.micro_hover)
---      border:SetVertexColor(.3,.3,.3)
     end
 
     --style the actionbar buttons
